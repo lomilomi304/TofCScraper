@@ -25,9 +25,9 @@ python TofCScraper.py -i input.csv -o output.csv
 |----------|-------------|
 | `-i, --input` | Path to input CSV file |
 | `-o, --output` | Path to output CSV file |
-| `--skip-stage1` | Skip Stage 1: Local catalog processing |
-| `--skip-stage2` | Skip Stage 2: LCCN lookup |
-| `--skip-stage3` | Skip Stage 3: 505 field retrieval |
+| `--skip-stage1` | Skip Stage 1: opac checks |
+| `--skip-stage2` | Skip Stage 2: LCCN finding |
+| `--skip-stage3` | Skip Stage 3: 505 grabs |
 | `-d, --delay` | Delay between requests in seconds (default: 1.0) |
 | `-r, --max-retries` | Maximum retries for failed requests (default: 3) |
 | `-v, --verbose` | Enable verbose output |
@@ -73,20 +73,20 @@ The final output CSV contains:
 
 ## Process
 
-### Stage 1: Local Catalog Processing
+### Stage 1: OPAC check
 1. Reads the input CSV file with BibIDs and titles
 2. For each record, scrapes the OPAC page
 3. Extracts ISBNs and LCCNs from MARC data
 4. Saves results to a temporary CSV file
 
-### Stage 2: LCCN Lookup
+### Stage 2: LCCN finding
 1. Reads the Stage 1 output (or a provided CSV file)
 2. For records missing an LCCN, attempts to find it via:
    - First trying an ISBN-based search at the Library of Congress
    - If unsuccessful, trying a title-based search (only works if single search result is returned)
 3. Saves results to a temporary CSV file
 
-### Stage 3: 505 Field Retrieval
+### Stage 3: 505 grabs
 1. Reads the Stage 2 output or a provided CSV file
 2. For each record with an LCCN, retrieves the MARCXML from LC
 3. Extracts the 505 field (table of contents) content (if exists)
