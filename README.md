@@ -1,7 +1,7 @@
 # TofCScraper
 
 A utility for fetching LCCNs & ISBNs from BibIDs, and extracting MARC 505 content based on LCCNs and ISBNs
-###This script is for educational purposes only. Use responsibly and always respect the terms of service of target websites.
+### This script is for educational purposes only. Use responsibly and always respect the terms of service of target websites.
 
 ## Installation
 
